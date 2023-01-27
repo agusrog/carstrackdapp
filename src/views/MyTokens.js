@@ -2,6 +2,10 @@ import { useWeb3React } from '@web3-react/core';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import useCarsTrack from '../hooks/useCarsTrack';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Connect from '../components/Connect';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function MyTokens() {
   const { active, account, error } = useWeb3React();
@@ -45,20 +49,29 @@ function MyTokens() {
     }
   }, [getMyTokens]);
 
-  if (!active && !error) return 'Conecta tu wallet';
+  if (!active && !error) return <Connect />;
 
   return (
     <>
+      {!error && account && tokens.length === 0 &&
+        <LoadingSpinner />
+      }
       {!error && account &&
         tokens.map(item => {
-          return <Link key={item.tokenId} to={`/${item.tokenId}`}>
-            <img src={item.image} alt={item.name} width="150" />
-            <p>{item.domain}</p>
-            <p>{item.brand.company}</p>
-            <p>{item.brand.model}</p>
-            <p>{item.ownerOf}</p>
-            <p>{new Date(item.year * 1000).toLocaleString()}</p>
-          </Link>
+          return <Card key={item.tokenId}>
+            <Card.Img variant="top" alt={item.name} src={item.image} />
+            <Card.Body>
+              <Card.Title>Dominio: {item.domain}</Card.Title>
+              <Card.Text>
+                <span>Marca: {item.brand.company} - Modelo: {item.brand.model}</span><br />
+                <span>Cuenta: {item.ownerOf}</span><br />
+                <span>Fecha de creacion: {new Date(item.year * 1000).toLocaleString()}</span>
+              </Card.Text>
+              <Link to={`/${item.tokenId}`}>
+                <Button>Ver detalle</Button>
+              </Link>
+            </Card.Body>
+          </Card>
         })
       }
     </>

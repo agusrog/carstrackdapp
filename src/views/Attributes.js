@@ -6,6 +6,9 @@ import useAlert from '../hooks/useAlert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
+import Connect from '../components/Connect';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function Attributes() {
     const { active, account, error } = useWeb3React();
@@ -76,7 +79,7 @@ function Attributes() {
             from: account,
         })
             .on("transactionHash", (txHash) => {
-                successAlert(`Transaccion satisfactioria numero: ${txHash}`);
+                successAlert(`Transaccion satisfactioria numero: ${txHash}, veras los resultados cuando la transaccion se complete.`);
             })
             .on("receipt", () => {
                 completeAlert();
@@ -113,64 +116,80 @@ function Attributes() {
             const note = await carsTrack.methods.viewNoteByCarIdAndNoteId(tokenId, index).call();
             notes.push(note);
         }
+        title.current.value = '';
+        desc.current.value = '';
         const newToken = { ...token, notes };
         setToken(newToken);
     }
 
-    if (!active && !error) return 'Conecta tu wallet';
+    if (!active && !error) return <Connect />;
     return (
-        <>
-            {canEdit &&
-                <Form>
-                    <Form.Group className="mb-2" controlId="title">
-                        <Form.Control type="text" ref={title} placeholder="Titulo" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-2" controlId="desc">
-                        <Form.Control as="textarea" ref={desc} rows={3} placeholder="Descripcion" />
-                    </Form.Group>
-                    <Button onClick={save} variant="primary" type="submit">
-                        Cargar
-                    </Button>
-                </Form>
+        <div className="attributes-container">
+            {!error && !token &&
+                <LoadingSpinner />
             }
-            {canEdit &&
-                <Form>
-                    <Form.Group className="mb-2" controlId="transferTo">
-                        <Form.Control type="text" ref={transferTo} placeholder="Trasnferir a:" />
-                    </Form.Group>
-                    <Button onClick={transfer} variant="primary" type="submit">
-                        Transferir
-                    </Button>
-                </Form>
-            }
-            {!error && token &&
-                <div>
-                    <img src={token.image} alt={token.name} width="150" />
-                    <p>{token.domain}</p>
-                    <p>{token.brand.company}</p>
-                    <p>{token.brand.model}</p>
-                    <p>{token.ownerOf}</p>
-                    <p>{new Date(token.year * 1000).toLocaleString()}</p>
-                </div>
+            <div className="attributes-card">
+                {!error && token &&
+                    <Card>
+                        <Card.Img variant="top" alt={token.name} src={token.image} />
+                        <Card.Body>
+                            <Card.Title>Dominio: {token.domain}</Card.Title>
+                            <Card.Text>
+                                <span>Marca: {token.brand.company} - Modelo: {token.brand.model}</span><br />
+                                <span>Cuenta: {token.ownerOf}</span><br />
+                                <span>Fecha de creacion: {new Date(token.year * 1000).toLocaleString()}</span>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                }
+                {!error && canEdit &&
+                    <Form>
+                        <Form.Group className="mb-2" controlId="transferTo">
+                            <Form.Control type="text" ref={transferTo} placeholder="Trasnferir a cuenta: Ej. 0x987..." />
+                        </Form.Group>
+                        <Button onClick={transfer} variant="primary" type="submit">
+                            Transferir
+                        </Button>
+                    </Form>
+                }
+            </div>
+            <div className="attributes-list">
+                {!error && canEdit &&
+                    <div className="attributes-list-form">
+                        <h4>Agregar nuevo registro</h4>
+                        <Form>
+                            <Form.Group className="mb-2" controlId="title">
+                                <Form.Control type="text" ref={title} placeholder="Titulo" />
+                            </Form.Group>
 
-            }
-
-            {!error && token &&
-                token.notes.map((item, index) => {
-                    return <div key={index}>
-                        <p>{item.title}</p>
-                        <p>{item.desc}</p>
-                        <p>{new Date(item.year * 1000).toLocaleString()}</p>
+                            <Form.Group className="mb-2" controlId="desc">
+                                <Form.Control as="textarea" ref={desc} rows={3} placeholder="Descripcion" />
+                            </Form.Group>
+                            <Button onClick={save} variant="primary" type="submit">
+                                Cargar
+                            </Button>
+                        </Form>
                     </div>
-                })
-            }
+                }
+                <div className={`${canEdit ? "attributes-list-note-container-owner" : "attributes-list-note-container"}`}>
+                    {!error && token &&
+                        token.notes.map((item, index) => {
+                            return <div key={index} className="attributes-list-note">
+                                <h5>{item.title}</h5>
+                                <p>{item.desc}</p>
+                                <p>{new Date(item.year * 1000).toLocaleString()}</p>
+                                <p>{item.signer}</p>
+                            </div>
+                        }).reverse()
+                    }
+                </div>                
+            </div>
             {showAlert &&
-                <Alert variant={alertType}>
+                <Alert className="alerts" variant={alertType}>
                     {alertMsg}
                 </Alert>
             }
-        </>
+        </div>
     );
 }
 

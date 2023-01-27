@@ -9,7 +9,7 @@ const useAlert = () => {
         setAlertMsg(msg);
         setAlertType('success');
         setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 5000);
+        setTimeout(() => setShowAlert(false), 7000);
     }
 
     const completeAlert = () => {

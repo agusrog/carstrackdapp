@@ -1,24 +1,219 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
 
 .App {
   text-align: center;
+}
 
-  }
+.App button {
+  background-color: var(--fifth) !important;
+  border-color: var(--fifth) !important;
+}
 
 .App-header {
-  background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
-  min-height: 10vh;
+  background-color: var(--first);
+  z-index: 1;
+  width: 100%;
+  min-height: 12vh;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
+  color: var(--fourth);
+  font-family: 'Poppins', sans-serif;
+}
+
+.App-header Button {
+  display: flex;
+  background-color: var(--second) !important;
+  border-color: var(--second) !important;
+  margin: 4px;
+}
+
+.App-header .section-header {
+  width: 30%;
+  min-width: max-content;
+}
+
+.App-header .section-header h2 {
+  font-size: 0.85rem;
+}
+
+.App-header .nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  padding: 5px 0;
+  min-width: 305px;
+}
+
+.App-header .user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  flex-wrap: wrap;
+  min-width: 500px;
+  font-size: 1rem;
+  color: var(--third);
+}
+
+.App-header .user-info button {
+  background-color: var(--first) !important;
+  border-color: var(--fourth) !important;
+  color: var(--third);
+}
+
+.App-header .user-info h4 {
+  font-size: large;
+  color: var(--fourth);
+}
+
+.App-header .user-info .connect-btn .btn-primary {
+  background-color: var(--fourth) !important;
+  border-color: var(--fourth) !important;
+  color: var(--first);
+}
+
+.App-header .user-info .user-accounts {
+  margin-right: 2px;
+}
+
+.App-header .user-info .user-accounts .user-account-data span {
+  margin: 0 2px;
 }
 
 .App-container {
-  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  overflow-x: hidden;
 }
 
-.test {
-  background-color: aqua;
+.App .card {
+  display: inline-block;
+  width: 475px;
+  min-height: 400px;
+  margin: 4px;
+}
+
+.App .card .card-body {
+  font-family: 'Poppins', sans-serif;
+  font-size: medium;
+}
+
+.App .card-img-top {
+  width: 150px;
+}
+
+.attributes-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.attributes-card, .attributes-list {
+  font-family: 'Poppins', sans-serif;
+  font-size: medium;
+  margin: 1rem;
+}
+
+.attributes-container .attributes-list h4 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--first);
+}
+
+.attributes-container .attributes-list .attributes-list-form {
+  margin-bottom: 1rem;
+}
+
+.attributes-container .attributes-list .attributes-list-note {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 5px;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container-owner {
+  padding: 0 1rem;
+  height: 55vh;
+  overflow-y: scroll;
+  background-color: var(--fourth);
+}
+
+.attributes-container .attributes-list .attributes-list-note-container {
+  padding: 0 1rem;
+  height: 75vh;
+  overflow-y: scroll;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container-owner::-webkit-scrollbar {
+  width: 10px;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container-owner::-webkit-scrollbar-track {
+  background: var(--fourth);
+  border-radius: 50px;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container-owner::-webkit-scrollbar-thumb {
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 30px solid var(--second)  /* creates padding around scroll thumb */
+}
+
+.attributes-container .attributes-list .attributes-list-note-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container::-webkit-scrollbar-track {
+  background: var(--fourth);
+  border-radius: 50px;
+}
+
+.attributes-container .attributes-list .attributes-list-note-container::-webkit-scrollbar-thumb {
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 30px solid var(--second)  /* creates padding around scroll thumb */
+}
+
+.admin-form {
+  padding: 0 2rem;
+  width: 70vw;
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-form h4 {
+  color: var(--first);
+}
+
+.connect-wallet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 55vh;
+  padding: 0 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--first);
+  font-size: xx-large;
+}
+
+.alerts {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  margin: 0;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  height: 55vh;
+}
+
+.loading {
+  background-color: var(--second );
 }

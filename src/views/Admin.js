@@ -6,6 +6,7 @@ import useAlert from '../hooks/useAlert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import Connect from '../components/Connect';
 
 function Admin() {
   const { active, account, error } = useWeb3React();
@@ -47,7 +48,7 @@ function Admin() {
 
   const create = (e) => {
     e.preventDefault();
-    if (meta.current.value > 0 && meta.current.value <= 8) {
+    if (meta.current.value >= 0 && meta.current.value < 8) {
       mint(
         wallet.current.value,
         domain.current.value,
@@ -58,49 +59,52 @@ function Admin() {
     }
   }
 
-  if (!active && !error) return 'Conecta tu wallet';
+  if (!active && !error) return <Connect />;
   return (
     <>
       {!error &&
-        <Form>
+        <div className="admin-form">
+          <h4>Agregar nueva unidad</h4>
+          <Form>
 
-          <Form.Group className="mb-2" controlId="wallet">
-            <Form.Control type="text" ref={wallet} placeholder="Direccion de cuenta" />
-          </Form.Group>
+            <Form.Group className="mb-2" controlId="wallet">
+              <Form.Control type="text" ref={wallet} placeholder="Direccion de cuenta" />
+            </Form.Group>
 
-          <Form.Group className="mb-2" controlId="domain">
-            <Form.Control type="text" ref={domain} placeholder="Dominio" />
-          </Form.Group>
+            <Form.Group className="mb-2" controlId="domain">
+              <Form.Control type="text" ref={domain} placeholder="Dominio" />
+            </Form.Group>
 
-          <Form.Group className="mb-2" controlId="company">
-            <Form.Control type="text" ref={company} placeholder="Marca" />
-          </Form.Group>
+            <Form.Group className="mb-2" controlId="company">
+              <Form.Control type="text" ref={company} placeholder="Marca" />
+            </Form.Group>
 
-          <Form.Group className="mb-2" controlId="model">
-            <Form.Control type="text" ref={model} placeholder="Modelo" />
-          </Form.Group>
+            <Form.Group className="mb-2" controlId="model">
+              <Form.Control type="text" ref={model} placeholder="Modelo" />
+            </Form.Group>
 
-          <Form.Group className="mb-2">
-            <Form.Select id="meta" ref={meta}>
-              <option value={0}>-- Color --</option>
-              <option value={1}>Rojo</option>
-              <option value={2}>Amarillo</option>
-              <option value={3}>Verde</option>
-              <option value={4}>Azul</option>
-              <option value={5}>Violeta</option>
-              <option value={6}>Blanco</option>
-              <option value={7}>Gris</option>
-              <option value={8}>Negro</option>
-            </Form.Select>
-          </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Select id="meta" ref={meta}>
+                <option value={10}>-- Color --</option>
+                <option value={0}>Rojo</option>
+                <option value={1}>Amarillo</option>
+                <option value={2}>Verde</option>
+                <option value={3}>Azul</option>
+                <option value={4}>Violeta</option>
+                <option value={5}>Negro</option>
+                <option value={6}>Gris</option>
+                <option value={7}>Blanco</option>
+              </Form.Select>
+            </Form.Group>
 
-          <Button onClick={create} variant="primary" type="submit">
-            Crear
-          </Button>
-        </Form>
+            <Button onClick={create} variant="primary" type="submit">
+              Crear
+            </Button>
+          </Form>
+        </div>
       }
       {showAlert &&
-        <Alert variant={alertType}>
+        <Alert className="alerts" variant={alertType}>
           {alertMsg}
         </Alert>
       }

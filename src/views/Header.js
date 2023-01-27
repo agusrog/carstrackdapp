@@ -62,37 +62,52 @@ function Header() {
 
   return (
     <>
-      <section>
+      <section className='section-header'>
         <h1>Cars Track Dapp</h1>
+        <h2>Registro de vehiculos</h2>
       </section>
 
-      <nav>
-        {!error && active &&
+      <nav className='nav'>
+        {!error &&
+          <>
+            <Button onClick={navigateToHome}>Home</Button>
+            <Button onClick={navigateToMyTokens}>Mis tokens</Button>
+          </>
+        }
+        {!error && owner === account && (
+          <>
+            <Button onClick={navigateToAdmin}>Crear nuevo token</Button>
+          </>
+        )}
+      </nav>
+
+      <section className='user-info'>
+        {error && !active &&
           <div>
-            <h4>{account}</h4>
-            <h4>{balance}</h4>
+            <h4>Hubo un error, asegurate de estar en la TestNet Goerli</h4>
           </div>
         }
 
-        {!error ? (
-          <div>
-            <Button onClick={navigateToHome}>Home</Button>
-            <Button onClick={navigateToMyTokens}>Mis tokens</Button>
+        {!error && !active &&
+          <div className='connect-btn'>
             <Button onClick={connect}>conectar</Button>
-            <Button onClick={disconnect}>desconectar</Button>
           </div>
-        ) : (
-          <div>
-            <h4>Esta red no esta soportada, cambia a la TestNet Goerli</h4>
-          </div>
-        )}
+        }
 
-        {!error && owner === account && (
-          <div>
-            <Button onClick={navigateToAdmin}>Crear nuevo token</Button>
-          </div>
-        )}
-      </nav>
+        {!error && active &&
+          <>
+            <div className='user-accounts'>
+              <div className='user-account-data'>
+                <span>Cuenta:</span><span>{account}</span>
+              </div>
+              <div className='user-account-data'>
+                <span>Saldo:</span><span>{balance}</span>
+              </div>
+            </div>
+            <Button onClick={disconnect}>desconectar</Button>
+          </>
+        }
+      </section>
     </>
   );
 }

@@ -1,6 +1,6 @@
 const CarsTracks = {
   address: {
-    5: "0xa5088b8DbC0DD1C50e75e64B215421B1CA90038E",
+    5: "0x6C6A921D6c55cA90f78E2BDE95e0418745B1B2d1",
   },
   abi: [
     {
@@ -383,7 +383,7 @@ const CarsTracks = {
         },
         {
           internalType: "bytes",
-          name: "data",
+          name: "_data",
           type: "bytes",
         },
       ],
@@ -584,6 +584,11 @@ const CarsTracks = {
               internalType: "uint256",
               name: "year",
               type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "signer",
+              type: "address",
             },
           ],
           internalType: "struct CarsTrackContract.Note",

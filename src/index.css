@@ -1,3 +1,11 @@
+:root {
+  --first: #257985;
+  --second: #5ea8a7;
+  --third: #9ccbcb;
+  --fourth: #ffffff;
+  --fifth: #ff4447;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +13,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--fourth);
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--fourth);
+  border-radius: 50px;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 30px solid var(--second)  /* creates padding around scroll thumb */
 }
 
 code {
