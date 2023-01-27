@@ -62,7 +62,7 @@ function Attributes() {
             from: account,
         })
             .on("transactionHash", (txHash) => {
-                successAlert(`Transaccion satisfactioria numero: ${txHash}`);
+                successAlert(`Transaccion satisfactioria numero: ${txHash}, veras los resultados cuando la transaccion se complete.`);
                 setCanEdit(false);
             })
             .on("receipt", () => {
