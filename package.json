@@ -2,7 +2,7 @@
   "name": "cars-dapp-fe",
   "version": "0.1.0",
   "private": true,
-  "homepages":"https://agusrog.github.io/carstrackdapp",
+  "homepage":"https://agusrog.github.io/carstrackdapp",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
