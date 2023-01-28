@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/carstrackdapp/static/css/main.07942296.css",
+    "main.js": "/carstrackdapp/static/js/main.4b1084a4.js",
+    "index.html": "/carstrackdapp/index.html",
+    "main.07942296.css.map": "/carstrackdapp/static/css/main.07942296.css.map",
+    "main.4b1084a4.js.map": "/carstrackdapp/static/js/main.4b1084a4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07942296.css",
+    "static/js/main.4b1084a4.js"
+  ]
+}
